@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
+	"net/http"
 )
 
 func main() {
-	fmt.Println("hello world")
+	http.ListenAndServe(":3000", &foursquareHandler{authToken: ""})
 }
