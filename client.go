@@ -1,6 +1,8 @@
 package main
 
 import (
+	"encoding/json"
+	"io/ioutil"
 	"net/http"
 	"net/url"
 )
@@ -13,7 +15,6 @@ type Client struct {
 	baseUrl   string
 	authToken string
 	version   string
-	http      httpGetter
 }
 
 func (c *Client) Url(path string, params *url.Values) (string, error) {
@@ -27,7 +28,21 @@ func (c *Client) Url(path string, params *url.Values) (string, error) {
 	return baseUrl.String(), err
 }
 
-func (c *Client) Recent() {
-	url, _ := c.Url("checkins/recent", nil)
-	c.http.Get(url)
+func (c *Client) Recent() (*[]Checkin, error) {
+	url, err := c.Url("checkins/recent", nil)
+	if err != nil {
+		return nil, err
+	}
+	res, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	body, err := ioutil.ReadAll(res.Body)
+	if err != nil {
+		return nil, err
+	}
+	var apiResponse APIResponse
+	err = json.Unmarshal(body, apiResponse)
+	return &apiResponse.Response.Recent, err
 }
