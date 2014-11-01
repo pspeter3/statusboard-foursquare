@@ -6,13 +6,12 @@ import (
 
 func TestClientUrl(t *testing.T) {
 	const (
-		baseUrl   = "https://api.foursquare.com/v2/"
 		authToken = "token"
 		version   = "1"
 		path      = "checkins/recent"
-		expected  = baseUrl + path + "?oauth_token=" + authToken + "&v=" + version
+		expected  = BaseUrl + path + "?oauth_token=" + authToken + "&v=" + version
 	)
-	client := Client{baseUrl: baseUrl, authToken: authToken, version: version}
+	client := Client{baseUrl: BaseUrl, authToken: authToken, version: version}
 	url, err := client.Url(path, nil)
 	if err != nil {
 		t.Error(err)

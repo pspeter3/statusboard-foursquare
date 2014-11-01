@@ -7,8 +7,32 @@ import (
 	"net/url"
 )
 
-type httpGetter interface {
-	Get(url string) (*http.Response, error)
+type Photo struct {
+	Prefix string `json:"prefix"`
+	Suffix string `json:"suffix"`
+}
+
+type User struct {
+	Id    string `json:"id"`
+	Photo *Photo `json:"photo"`
+}
+
+type Venue struct {
+	Name string `json:"name"`
+}
+
+type Checkin struct {
+	CreatedAt uint32 `json:"createdAt"`
+	User      *User  `json:"user"`
+	Venue     *Venue `json:"venue"`
+}
+
+type Response struct {
+	Recent *[]Checkin `json:"recent"`
+}
+
+type APIResponse struct {
+	Response *Response `json:"response"`
 }
 
 type Client struct {
@@ -43,6 +67,6 @@ func (c *Client) Recent() (*[]Checkin, error) {
 		return nil, err
 	}
 	var apiResponse APIResponse
-	err = json.Unmarshal(body, apiResponse)
-	return &apiResponse.Response.Recent, err
+	err = json.Unmarshal(body, &apiResponse)
+	return apiResponse.Response.Recent, err
 }
