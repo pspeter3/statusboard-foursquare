@@ -35,19 +35,20 @@ type APIResponse struct {
 	Response *Response `json:"response"`
 }
 
+const BaseUrl = "https://api.foursquare.com/v2/"
+
 type Client struct {
-	baseUrl   string
-	authToken string
-	version   string
+	AuthToken string
+	Version   string
 }
 
 func (c *Client) Url(path string, params *url.Values) (string, error) {
 	if params == nil {
 		params = &url.Values{}
 	}
-	params.Add("oauth_token", c.authToken)
-	params.Add("v", c.version)
-	baseUrl, err := url.Parse(c.baseUrl + path)
+	params.Add("oauth_token", c.AuthToken)
+	params.Add("v", c.Version)
+	baseUrl, err := url.Parse(BaseUrl + path)
 	baseUrl.RawQuery = params.Encode()
 	return baseUrl.String(), err
 }

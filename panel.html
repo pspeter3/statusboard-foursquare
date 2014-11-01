@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="60">
+  <title>StatusBoard Foursquare</title>
+</head>
+<body>
+  {{ range . }}
+    <div class="checkin">
+      <img class="avatar" src="{{ .Photo }}">
+      <div class="venue">{{ .Venue }}</div>
+      <div class="time">{{ .Time }}</div>
+    </div>
+  {{ end }}
+</body>
+</html>
