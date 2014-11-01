@@ -6,21 +6,28 @@ import (
 )
 
 type httpGetter interface {
-	Get(url string) (resp *http.Response, err error)
+	Get(url string) (*http.Response, error)
 }
 
-type client struct {
+type Client struct {
 	baseUrl   string
 	authToken string
 	version   string
 	http      httpGetter
 }
 
-func (c *client) recent() {
-	baseUrl, _ := url.Parse(c.baseUrl + "/checkins/recent")
-	params := url.Values{}
+func (c *Client) Url(path string, params *url.Values) (string, error) {
+	if params == nil {
+		params = &url.Values{}
+	}
 	params.Add("oauth_token", c.authToken)
 	params.Add("v", c.version)
+	baseUrl, err := url.Parse(c.baseUrl + path)
 	baseUrl.RawQuery = params.Encode()
-	c.http.Get(baseUrl.RequestURI())
+	return baseUrl.String(), err
+}
+
+func (c *Client) Recent() {
+	url, _ := c.Url("checkins/recent", nil)
+	c.http.Get(url)
 }
