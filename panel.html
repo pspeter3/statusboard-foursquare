@@ -5,13 +5,47 @@
   <meta http-equiv="refresh" content="60">
   <meta application-name="statusboard-foursquare" data-default-size="8,3" data-allows-resizing="YES" data-allows-scrolling="YES">
   <title>StatusBoard Foursquare</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      margin: 0;
+      padding: 0;
+    }
+    .checkin {
+      align-items: center;
+      display: flex;
+      height: 59px;
+      padding: 6px;
+    }
+    .wrap {
+      flex: 0 1 auto;
+      width: 62px;
+    }
+    .avatar {
+      border-radius: 25px;
+      height: 50px;
+      width: 50px;
+    }
+    .venue {
+      flex: 1;
+      font-weight: normal;
+    }
+    .time {
+      flex: 0 1 auto;
+      width: 62px;
+      text-align: right;
+    }
+  </style>
 </head>
 <body>
   {{ range . }}
     <div class="checkin">
-      <img class="avatar" src="{{ .Photo }}">
-      <div class="venue">{{ .Venue }}</div>
-      <div class="time">{{ .Time }}</div>
+      <div class="wrap">
+        <img class="avatar" src="{{ .Photo }}">
+      </div>
+      <h1 class="venue">{{ .Venue }}</h1>
+      <h2 class="time">{{ .Time }}</h2>
     </div>
   {{ end }}
 </body>
