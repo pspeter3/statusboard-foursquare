@@ -13,13 +13,19 @@
       padding: 0;
     }
     .checkin {
-      align-items: center;
+      -webkit-align-items: center;
+          -ms-flex-align: center;
+              align-items: center;
+      display: -webkit-flex;
+      display: -ms-flexbox;
       display: flex;
       height: 59px;
       padding: 6px;
     }
     .wrap {
-      flex: 0 1 auto;
+      -webkit-flex: 0 1 auto;
+          -ms-flex: 0 1 auto;
+              flex: 0 1 auto;
       width: 62px;
     }
     .avatar {
@@ -28,11 +34,15 @@
       width: 50px;
     }
     .venue {
-      flex: 1;
+      -webkit-flex: 1;
+          -ms-flex: 1;
+              flex: 1;
       font-weight: normal;
     }
     .time {
-      flex: 0 1 auto;
+      -webkit-flex: 0 1 auto;
+          -ms-flex: 0 1 auto;
+              flex: 0 1 auto;
       width: 62px;
       text-align: right;
     }
