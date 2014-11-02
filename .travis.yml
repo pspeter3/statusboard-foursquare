@@ -1,1 +1,2 @@
+env: AUTH_TOKEN="" IDS="" PORT="3000" VERSION=""
 language: go

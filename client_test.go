@@ -11,7 +11,7 @@ func TestClientUrl(t *testing.T) {
 		path      = "checkins/recent"
 		expected  = BaseUrl + path + "?oauth_token=" + authToken + "&v=" + version
 	)
-	client := client{AuthToken: authToken, Version: version}
+	client := Client{AuthToken: authToken, Version: version}
 	url, err := client.Url(path, nil)
 	if err != nil {
 		t.Error(err)
