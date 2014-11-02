@@ -22,7 +22,7 @@ type Venue struct {
 }
 
 type Checkin struct {
-	CreatedAt uint32 `json:"createdAt"`
+	CreatedAt int64  `json:"createdAt"`
 	User      *User  `json:"user"`
 	Venue     *Venue `json:"venue"`
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"html/template"
 	"net/http"
+	"time"
 )
 
 var templates = template.Must(template.ParseFiles("panel.html"))
@@ -29,15 +30,19 @@ func (f *Handler) ServeHTTP(rw http.ResponseWriter, req *http.Request) {
 		return
 	}
 	checkinRows := []CheckinRow{}
-	var photo string
 	for _, checkin := range *checkins {
 		if _, ok := f.Ids[checkin.User.Id]; ok {
-			photo = checkin.User.Photo.Prefix + "64x64" + checkin.User.Photo.Suffix
-			checkinRows = append(checkinRows, CheckinRow{Photo: photo, Venue: checkin.Venue.Name, Time: ""})
+			checkinRows = append(checkinRows, toCheckinRow(checkin))
 		}
 	}
 	err = templates.ExecuteTemplate(rw, "panel.html", &checkinRows)
 	if err != nil {
 		http.Error(rw, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+func toCheckinRow(checkin Checkin) CheckinRow {
+	photo := checkin.User.Photo.Prefix + "64x64" + checkin.User.Photo.Suffix
+	time := relative(time.Unix(checkin.CreatedAt, 0))
+	return CheckinRow{Photo: photo, Venue: checkin.Venue.Name, Time: time}
 }
