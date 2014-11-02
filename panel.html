@@ -5,48 +5,7 @@
   <meta http-equiv="refresh" content="60">
   <meta application-name="statusboard-foursquare" data-default-size="8,3" data-allows-resizing="YES" data-allows-scrolling="YES">
   <title>StatusBoard Foursquare</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      margin: 0;
-      padding: 0;
-    }
-    .checkin {
-      -webkit-align-items: center;
-          -ms-flex-align: center;
-              align-items: center;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: flex;
-      height: 59px;
-      padding: 6px;
-    }
-    .wrap {
-      -webkit-flex: 0 1 auto;
-          -ms-flex: 0 1 auto;
-              flex: 0 1 auto;
-      width: 62px;
-    }
-    .avatar {
-      border-radius: 25px;
-      height: 50px;
-      width: 50px;
-    }
-    .venue {
-      -webkit-flex: 1;
-          -ms-flex: 1;
-              flex: 1;
-      font-weight: normal;
-    }
-    .time {
-      -webkit-flex: 0 1 auto;
-          -ms-flex: 0 1 auto;
-              flex: 0 1 auto;
-      width: 62px;
-      text-align: right;
-    }
-  </style>
+  <link rel="stylesheet" href="">
 </head>
 <body>
   {{ range . }}
