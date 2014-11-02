@@ -1,0 +1,5 @@
+{
+	"ImportPath": "github.com/pspeter3/statusboard-foursquare",
+	"GoVersion": "go1.3.3",
+	"Deps": []
+}
